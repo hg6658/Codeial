@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/chatList.css">
+<% if(locals.user) {%>
+<div id="chat-List-Box" my-id="<%= locals.user.id %>"">
+    <div id="mastHead">
+        <div id="heading">Connections</div>
+        <div id="minimize">
+            <Button>\/</Button>
+        </div>
+    </div>
+    <div id="chatList">
+    </div>
+</div>
+<div id="minimized-list">
+    <div id="minimized-heading">Connections</div>
+        <div id="minimized-maximize">
+            <Button>/\</Button>
+    </div>
+</div>
+<% } %>    

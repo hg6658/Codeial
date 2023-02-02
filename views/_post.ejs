@@ -1,0 +1,88 @@
+<% for(post of posts){ %>
+<div id="post-<%= post._id %>" class="post">
+    <div class="postPhotos">
+        <div class="prevButton"><button>&lt;</button></div>
+        <div class="postSlide">
+            <% let cnt =0; %>
+            <% for(let photo of post.photos){ %>
+                <% if(cnt==0) {%>
+                    <div class="photo-0 animator">
+                        <img src="<%=photo %>" class="photo"/>
+                    </div>
+                <% }else{%>    
+                    <div class="photo-x">
+                        <img src="<%=photo %>" class="photo"/>
+                    </div>
+            <% } %>
+            <% cnt++; %>
+            <%}%>
+        </div>
+        <div class="nextButton"><button>&gt;</button></div>
+    </div>
+    <p>
+        <% if (locals.user && locals.user.id == post.user.id){ %>
+        <small>
+            <a class="delete-post-button"  href="/posts/destroy/<%= post.id %>">X</a>
+        </small>
+        <% } %>
+        <%= post.content %>
+        <br>
+        <small>
+            <%= post.user.name %>
+        </small>
+
+        <!-- CHANGE :: display the likes of this post, if the user is logged in, then show the link to toggle likes, else, just show the count -->
+        <br>
+            <!-- study about the data attribute -->
+        <small>
+            <% if (locals.user){ %>
+                <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%=post._id%>&type=Post">
+                        <%= post.likes.length %> Likes
+                </a>
+            <% }else{ %>
+                <%= post.likes.length %> Likes
+            <% } %>
+        </small>
+
+    </p>
+    <div class="post-comments">
+        <% if (locals.user){ %>
+            <!-- let's give an id to the new comment form, we'll also need to make the same changes in home_posts.js where we're adding a post to the page -->
+            <div class="wrapper">
+                <div id="emojis">
+                        Add emojis:
+                        <ul>
+                            <li data-code=" &#128151; ">&#128151;</li>
+                            <li data-code=" &#128514; ">&#128514;</li>
+                            <li data-code=" &#128525; ">&#128525;</li>
+                            <li data-code=" &#128544; ">&#128544;</li>
+                            <li data-code=" &#128549; ">&#128549;</li>
+                            <li data-code=" &#128543; ">&#128543;</li>
+                            <li data-code=" &#128077; ">&#128077;</li>
+                            <li data-code=" &#128078; ">&#128078;</li>
+                        </ul>
+                </div>
+                <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST">
+                    <input type="text" id="comment" name="content" placeholder="Type Here to add comment..." required>
+                    <input type="hidden" name="post" value="<%= post._id %>" >
+                    <input type="submit" value="Add Comment">
+                
+                </form>
+            </div>
+        <% } %>
+
+        <div class="post-comments-list">
+            <ul id="post-comments-<%= post._id %>">
+                <% for (comment of post.comments){%>
+                    <%- include('_comment',{comment:comment}) -%>
+                    
+                
+                <%} %>
+            </ul>
+        </div>
+    </div>
+    
+</div>
+
+<%} %>
+

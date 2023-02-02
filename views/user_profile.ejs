@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+
+<img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
+
+
+
+<% if(user.id == profile_user.id){ %>
+    <!-- if user matches then show the form -->
+    <p>
+        <h4>Update Profile</h4>
+        <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
+            <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
+            <br/>
+            <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+            <br/>
+            <input type="file" name="avatar" placeholder="Profile Picture">
+            <input type="submit"  value="Update">
+        </form>
+    </p>
+    <p>
+        <h4>Create Post</h4>
+        <p>Upload only images minimum 1 maximum 7</p>
+        <form action="/posts/create" id="new-post-form" method="POST" enctype="multipart/form-data">
+            <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
+            <br/>
+            <input type="file" name="photos" placeholder="Upload Photos" accept="image/*" required multiple>
+            <input type="submit" value="Post">
+        </form>
+
+    </p>
+    <p>
+        <h4>Your Recent Post</h4>
+        <div id="posts-list-container">
+            <ul>
+                <%- include('_post',{posts:profile_user.posts}) -%>
+            </ul>
+        </div>
+    </p>
+    
+<%}else{%>    
+    <!-- else show only the profile info -->
+    <p><%= profile_user.name %></p>
+    <p><%= profile_user.email %></p>
+    <% if(deleted) {%>
+        <button id="friendAdd" deleted="true" add-link="friend/toggle/?from=<%= user.id %>&to=<%= profile_user.id%>&deleted=w"> + Add Friend </button>
+    <% }else{ %>
+        <button id="friendAdd" deleted="false" add-link="friend/toggle/?from=<%= user.id %>&to=<%= profile_user.id%>&deleted="> - Remove Friend </button>
+    <% } %>    
+<%} %>
+<script src="/js/toggle_likes.js"></script>
+<script src="/js/user_profile.js"></script>
+<script src="/js/addFriend.js"></script>
+
+<script>
+    $('#friendAdd').click(function(e){
+        e.preventDefault();
+        let self = this;
+        let friendAdd = new FriendAdd(this);
+    })
+</script>
+
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/chatBox.css">
+<% if(locals.user) {%>
+<div id="chat-room">
+    <div id="mastHead-chatBox">
+        <div id="userName">Michael</div>
+        <div id="close">
+            <Button id="minimize-chat">\/</Button>
+            <Button id="close-chat">X</Button>
+        </div>
+    </div>
+    <div id="user-chat-box">
+    </div>
+    <div id="lower-panel">
+        <div id="searchSpace">
+        <input type="search" placeholder="Enter text"/></div>
+        <div id="submitButton">
+            <Button>Send</Button>
+        </div>
+    </div>
+</div> 
+<div id="minimized-chat">
+    <div id="minimized-username">Michael</div>
+        <div id="minimized-open">
+            <Button>/\</Button>
+        </div>
+        <div id="minimized-close">
+            <Button>X</Button>
+        </div>
+</div>   
+<% } %>    

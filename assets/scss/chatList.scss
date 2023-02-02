@@ -1,0 +1,112 @@
+#chat-List-Box{
+    display: none;
+    width: 260px;
+    height: 350px;
+    border: 3px solid black;
+    border-top-left-radius: 16px ;
+    border-top-right-radius: 16px ;
+}
+
+#chatList{
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+}
+
+#mastHead{
+    width: 100%;
+    height: 10%;
+    background:#32de84;
+    color: white;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+    border-top-left-radius: 16px ;
+    border-top-right-radius: 16px ;
+}
+
+
+#minimize, #minimized-maximize{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 4px;
+    Button{
+        background: lightgreen;
+        border-radius: 5px;
+        color: white;
+        margin: 5px;
+    }
+}
+
+#heading, #minimized-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#minimized-list{
+    width: 260px;
+    height: 35px;
+    border: 3px solid black;
+    border-top-left-radius: 16px ;
+    border-top-right-radius: 16px ;
+    background:#32de84;
+    color: white;
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+}
+
+
+#chatList{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.chatListItem{
+    height: 35px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 1fr;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.username-chatList{
+    font-family: Roboto, arial, helvetica;
+    font-weight: bold;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin-left: 10px;
+    color: white;
+}
+
+.message-chatList{
+    font-family: Roboto, arial, helvetica;
+    color: grey;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin-left: 10px;
+}
+
+.Img-chatList{
+    grid-column: 1/2;
+    grid-row: 1/3;
+    padding: 5px;
+}
+
+.Img-chatList img{
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 2px solid black;
+    
+}
+
+

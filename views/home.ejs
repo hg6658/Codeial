@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="home-container" user-id="<%= locals.user.id %>">
+    <section id="feed-posts">
+            <h4>Posts</h4> 
+            <div id="posts-list-container">
+                <ul>
+                    <% for(datum of data){ %>
+                    <% if(datum.to_user){ %>    
+                        <%- include('_post',{posts:datum.to_user.posts}) -%>
+                    <% }else{ %>
+                        <%- include('_post',{posts:datum.from_user.posts}) -%>
+                    <% }%>       
+                    <%} %>
+                </ul>
+            </div>
+        </section>
+        
+        
+        <section id="user-friends">
+            <h4>Friends</h4>
+            <% for(datum of data){%>
+                <% if(datum.to_user){ %>
+                <p>
+                    <a href="/users/profile/<%= datum.to_user.id %>"><%= datum.to_user.name %></a>
+                    <br/>
+                    <Button class="openChat" sid="<%= datum.to_user.id %>">chat</Button>
+                </p>
+                <% }else{ %>
+                    <p>
+                        <a href="/users/profile/<%= datum.from_user.id %>"><%= datum.from_user.name %></a>
+                        <br/>
+                        <Button class="openChat" sid="<%= datum.from_user.id %>">chat</Button>
+                    </p>
+                <% } %>    
+
+            <% } %>
+        </section>
+        <section id="people-know">
+            <h4>People You May Know</h4>
+            <% for(people of peoplenotknow){%>
+                <p>
+                    <a href="/users/profile/<%= people._id %>"><%= people.name %></a>
+                <p>
+            <% } %>    
+        </section>
+</div>
+
+<div id="chatSection">
+<%- include('chatBox') %>
+<%- include('chatList') %>
+</div>
+<!-- importing this script for creating the comments -->
+<script src="/js/initialize.js"></script>
+<script src="/js/toggle_likes.js"></script>
+<script src="/js/home_posts.js"></script>
+
+<!-- CHANGE :: import the script file for toggle likes, also run it over for the already present posts and comments on the page -->
+
+
+<script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+<script src="/js/chat-engine.js"></script>
+<script>
+    let chatEngine = new ChatEngine();
+</script>
+<script src="/js/startChat.js"></script>
+<script>
+    $('.openChat').each(function(){
+        let self = this;  
+        let newChat = new startChat(self,chatEngine);
+    })
+</script>    
+<script src="/js/chatBox.js"></script>
+<script src="/js/chatList.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

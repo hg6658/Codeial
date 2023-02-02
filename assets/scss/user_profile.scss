@@ -1,0 +1,62 @@
+body{
+    background-color: lightblue;
+}
+
+#emojis{
+    li{
+        display: inline-block;
+        margin: 3px;
+        padding: 3px;
+        border-radius: 4px;
+    }
+
+    ul{
+        display: inline-block;
+        border-radius: 5px;
+        padding-left: 0;
+        background-color: rgba(128, 128, 128, 0.3);
+    }
+
+    li:hover{
+        background-color: rgb(128, 128, 128);
+    }
+
+}
+
+
+.postPhotos{
+    display: flex;
+}
+
+.postSlide{
+    position: relative;
+    width: 480px;
+    height: 480px;
+}
+
+.photo{
+    width: 480px;
+    height: 480px;
+}
+
+.photo-0{
+    position: absolute;
+}
+
+.photo-x{
+    position: absolute;
+}
+
+.animator{
+    z-index:1;
+}
+
+@keyframes mymove0 {
+    0%{
+        z-index: 0;
+    }
+    100%{
+        z-index: 1;
+    }
+
+}
